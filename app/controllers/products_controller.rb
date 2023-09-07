@@ -1,5 +1,10 @@
 class ProductsController < ApplicationController
   def getAllProducts
-    render json:['all','the','products']
+    json_data = File.read('db/products.json')
+    @products = JSON.parse(json_data)
+    respond_to do |format|
+      format.html 
+      format.json { render json: @products }
+    end
   end
 end
